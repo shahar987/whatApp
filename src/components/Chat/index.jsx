@@ -5,15 +5,15 @@ import "./Chat.css";
 import AttachFile from "@material-ui/icons/AttachFile";
 import MoreVert from "@material-ui/icons/MoreVert";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import ClearIcon from '@material-ui/icons/Clear';
+import ClearIcon from "@material-ui/icons/Clear";
 import MicIcon from "@material-ui/icons/Mic";
 import SendIcon from "@material-ui/icons/Send";
 import { useParams } from "react-router-dom";
-import db from "./firebase";
-import { useStateValue } from "./StateProvider";
-import { Emojis } from "./Emojis";
+import db from "../../firebase";
+import { useStateValue } from "../../Hooks/StateProvider";
+import { Emojis } from "../Emojis";
 
-function Chat() {
+export const Chat = () => {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
   const { roomId } = useParams();
@@ -81,6 +81,7 @@ function Chat() {
       <div className="chat__body">
         {messages.map((message) => (
           <p
+            key={message.id}
             className={`chat__message ${
               message.name === user.displayName && "chat__reciever"
             }`}
@@ -97,19 +98,15 @@ function Chat() {
         <div>
           <Emojis setInput={setInput} />
         </div>
-      ) : (
-        <></>
-      )}
+      ) : null}
       <div className="chat__footer">
         {showEmojis ? (
-          <IconButton>
-            <ClearIcon onClick={() => setShowEmojis(false)} />
+          <IconButton onClick={() => setShowEmojis(false)}>
+            <ClearIcon />
           </IconButton>
-        ) : (
-          <></>
-        )}
-        <IconButton>
-          <InsertEmoticonIcon onClick={() => setShowEmojis(true)} />
+        ) : null}
+        <IconButton onClick={() => setShowEmojis(true)}>
+          <InsertEmoticonIcon />
         </IconButton>
 
         <IconButton>
@@ -139,6 +136,4 @@ function Chat() {
       </div>
     </div>
   );
-}
-
-export default Chat;
+};

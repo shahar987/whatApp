@@ -7,7 +7,6 @@ export const Search = ({rooms, setRooms, getRooms}) => {
   const search = (e) => {
     const searchInput = lowerCase(e.target.value);
     if (searchInput === "") {
-      console.log("empty")
       getRooms()
     } else {
       const filteredRooms = rooms.filter((room) =>

@@ -4,11 +4,11 @@ import { Avatar, IconButton } from "@material-ui/core";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import SidebarChat from "./SidebarChat";
-import db from "./firebase";
-import { Search } from "./Search";
+import { SidebarChat } from "../SidebarChat/SidebarChat";
+import db from "../../firebase";
+import { Search } from "../Search/Search";
 
-function Sidebar() {
+export const Sidebar = () => {
   const [rooms, setRooms] = useState([]);
 
   const getRooms = () => {
@@ -58,7 +58,7 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar__search">
-        <Search rooms={rooms} setRooms={setRooms} getRooms={getRooms}/>
+        <Search rooms={rooms} setRooms={setRooms} getRooms={getRooms} />
       </div>
       <div className="sidebar__chat">
         <SidebarChat addNewChat />
@@ -75,6 +75,4 @@ function Sidebar() {
       </div>
     </div>
   );
-}
-
-export default Sidebar;
+};

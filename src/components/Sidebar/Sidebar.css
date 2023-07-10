@@ -3,6 +3,7 @@
     flex-direction: column;
     flex: 0.35;
     min-height: 100%;
+    overflow-x: hidden;
 }
 
 .sidebar__search{
@@ -14,7 +15,6 @@
 }
 
 .sidebar__header{
-
     display: flex;
     justify-content: space-between;
     padding: 20px;

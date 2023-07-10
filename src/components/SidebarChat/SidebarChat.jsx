@@ -2,13 +2,13 @@ import { Avatar } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import KeyboardArrowDown from "@material-ui/icons/Clear";
-import db from "./firebase";
+import db from "../../firebase";
 import "./SidebarChat.css";
 
-function SidebarChat({ id, name, addNewChat, deleteRoom}) {
+export const SidebarChat = ({ id, name, addNewChat, deleteRoom }) => {
   const [seed, setSeed] = useState("");
   const [messages, setMessages] = useState("");
-  const [showDownArrow, setShowDownArrow] = useState(false)
+  const [showDownArrow, setShowDownArrow] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -73,14 +73,26 @@ function SidebarChat({ id, name, addNewChat, deleteRoom}) {
 
   return !addNewChat ? (
     <Link to={`/rooms/${id}`}>
-      <div className="sidebarChat" onMouseEnter={()=>setShowDownArrow(true)} onMouseLeave={()=>setShowDownArrow(false)}>
+      <div
+        className="sidebarChat"
+        onMouseEnter={() => setShowDownArrow(true)}
+        onMouseLeave={() => setShowDownArrow(false)}
+      >
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="sidebarChat__info">
           <h2>{name}</h2>
           <p id="time">{messages[0]?.lastMessageTime}</p>
           <p id="message">{messages[0]?.message}</p>
-          {showDownArrow?<KeyboardArrowDown className="delete" onClick={()=>deleteRoom(id)}>delete</KeyboardArrowDown>:<div className="delete"></div>}
-          
+          {showDownArrow ? (
+            <KeyboardArrowDown
+              className="delete"
+              onClick={() => deleteRoom(id)}
+            >
+              delete
+            </KeyboardArrowDown>
+          ) : (
+            <div className="delete"></div>
+          )}
         </div>
       </div>
     </Link>
@@ -89,6 +101,4 @@ function SidebarChat({ id, name, addNewChat, deleteRoom}) {
       <h2>Add new chat</h2>
     </div>
   );
-}
-
-export default SidebarChat;
+};
