@@ -6,17 +6,18 @@ import Login from "./Login";
 import { useStateValue } from './StateProvider';
 
 function App() {
-  const[{user}, dispatch] = useStateValue();
+  const[{user}] = useStateValue();
   
   return (
     <div className="app">
+      {console.log(user)}
       {!user ? (
       <Login/>
       ):(
         <div className="app__body">
         <Router>
           <Sidebar/>
-          <Routes >
+          <Routes>
             <Route path="/rooms/:roomId" element={<Chat/>}/>
             <Route path="/" element={<Chat/>}/>
           </Routes>
